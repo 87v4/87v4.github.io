@@ -1,201 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <title>Coming Soon</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>87V4</title>
+
   <style>
-    /* Make body full height and use flex for layout */
-    body {
+    :root {
+      --bg: #0b0d12;
+      --card: #121521;
+      --accent: #7c7cff;
+      --accent-glow: rgba(124,124,255,.6);
+      --text: #e8e8f0;
+      --muted: #9aa0ff;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: #f2f2f2;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+    }
+
+    body {
       min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #1a1d3a, transparent 60%),
+        var(--bg);
+      color: var(--text);
       display: flex;
-      flex-direction: column;
-    }
-
-    /* Navbar at top (optional) */
-    #navbar {
-      width: 100%;
-      background-color: rgba(30,30,30,0.95);
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 12px 0;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.7);
-      z-index: 1000;
-    }
-    #navbar a {
-      text-decoration: none;
-      color: #f2f2f2;
-      padding: 10px 20px;
-      border-radius: 8px;
-      transition: 0.3s;
-    }
-    #navbar a:hover {
-      background-color: #444;
-    }
-
-    /* Main content grows to fill space */
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      padding: 40px 0;
-      width: 100%;
-    }
-
-    /* Gallery Grid */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      max-width: 1200px;
-      width: 95%;
-    }
-
-    .gallery-item {
-      background-color: #1e1e1e;
-      border-radius: 12px;
+      justify-content: center;
       overflow: hidden;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative;
     }
 
-    .gallery-item video {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .gallery-item .title {
+    /* Animated background particles */
+    .bg {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 8px;
-      background: rgba(0,0,0,0.6);
-      color: #fff;
-      font-size: 1rem;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .bg span {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--accent);
+      opacity: 0.4;
+      animation: float 12s linear infinite;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh) scale(1);
+      }
+      to {
+        transform: translateY(-10vh) scale(0.5);
+      }
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(180deg, #151933, #0e1124);
+      padding: 3rem 3.5rem;
+      border-radius: 24px;
+      box-shadow:
+        0 0 40px rgba(124,124,255,0.15),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
       text-align: center;
-      opacity: 0;
-      transition: opacity 0.3s;
+      max-width: 480px;
+      width: 90%;
+      animation: fadeUp 1.2s ease forwards;
     }
 
-    .gallery-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .gallery-item:hover .title {
-      opacity: 1;
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #a5a5ff, #6b6bff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px var(--accent-glow);
+      margin-bottom: 1rem;
     }
 
-    /* Footer fixed to bottom */
+    p {
+      color: #c7cbff;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      animation: fadeIn 1.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .progress {
+      height: 10px;
+      width: 100%;
+      background: #0b0e1a;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(
+        90deg,
+        #6b6bff,
+        #9c9cff
+      );
+      box-shadow: 0 0 20px var(--accent-glow);
+      animation: load 2.5s ease forwards;
+    }
+
+    @keyframes load {
+      to { width: 72%; }
+    }
+
+    .label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .glow {
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle, rgba(124,124,255,0.15), transparent 60%);
+      animation: pulse 6s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
     footer {
-      background-color: #1e1e1e;
-      padding: 20px;
-      text-align: center;
-      color: #aaa;
-      border-top: 1px solid #333;
-      width: 100%;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
-    }
-    footer a {
-      color: #f2f2f2;
-      margin: 0 10px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    footer a:hover {
-      color: #ff9800;
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      color: #6e73ff;
+      opacity: 0.8;
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 1024px) {
-      .gallery {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    @media (max-width: 768px) {
-      .gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .gallery-item video {
-        height: 150px;
-      }
-    }
-    @media (max-width: 480px) {
-      .gallery {
-        grid-template-columns: 1fr;
-      }
-      .gallery-item video {
-        height: 200px;
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 2.2rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div id="navbar">
-    <a href="#home">Home</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+  <!-- floating background dots -->
+  <div class="bg" id="bg"></div>
+
+  <div class="card">
+    <div class="glow"></div>
+    <h1>Coming Soon</h1>
+    <p>
+      We’re building something bold, fast, and unforgettable.
+      Stay tuned — the future is loading.
+    </p>
+
+    <div class="progress">
+      <div class="bar"></div>
+    </div>
+
+    <div class="label">Launching Soon</div>
+
+    <footer>© 2026 · All rights reserved</footer>
   </div>
 
-  <!-- Main Content -->
-  <main>
-    <div class="gallery" id="gallery">
-      <div class="gallery-item">
-        <video src="video-1.mp4" controls></video>
-        <div class="title">COMING SOON!</div>
-      </div>
-      <div class="gallery-item">
-        <video src="video-2.mp4" controls></video>
-        <div class="title">COMING SOON!</div>
-      </div>
-      <div class="gallery-item">
-        <video src="video-3.mp4" controls></video>
-        <div class="title">COMING SOON!</div>
-      </div>
-      <div class="gallery-item">
-        <video src="video-4.mp4" controls></video>
-        <div class="title">COMING SOON!</div>
-      </div>
-      <div class="gallery-item">
-        <video src="video-5.mp4" controls></video>
-        <div class="title">COMING SOON!</div>
-      </div>
-      <div class="gallery-item">
-        <video src="video-6.mp4" controls></video>
-        <div class="title">COMING SOON!</div>
-      </div>
-      <div class="gallery-item">
-        <video src="video-7.mp4" controls></video>
-        <div class="title">COMING SOON!</div>
-      </div>
-      <div class="gallery-item">
-        <video src="video-8.mp4" controls></video>
-        <div class="title">COMING SOON!</div>
-      </div>
-      <!-- Add more items to fill 4x4 grid -->
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    &copy; 2026 87V4
-  </footer>
+  <script>
+    // generate floating background particles
+    const bg = document.getElementById("bg");
+    for (let i = 0; i < 60; i++) {
+      const s = document.createElement("span");
+      s.style.left = Math.random() * 100 + "%";
+      s.style.animationDuration = 8 + Math.random() * 10 + "s";
+      s.style.animationDelay = Math.random() * 5 + "s";
+      bg.appendChild(s);
+    }
+  </script>
 
 </body>
 </html>
