@@ -2,36 +2,200 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Coming Soon</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Gallery 4x4</title>
   <style>
+    /* Make body full height and use flex for layout */
     body {
       margin: 0;
-      height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #f2f2f2;
+      min-height: 100vh;
       display: flex;
-      align-items: center;
+      flex-direction: column;
+    }
+
+    /* Navbar at top (optional) */
+    #navbar {
+      width: 100%;
+      background-color: rgba(30,30,30,0.95);
+      display: flex;
       justify-content: center;
-      background: #0f0f0f;
-      color: #ffffff;
-      font-family: Arial, Helvetica, sans-serif;
+      gap: 20px;
+      padding: 12px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+      z-index: 1000;
+    }
+    #navbar a {
+      text-decoration: none;
+      color: #f2f2f2;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    #navbar a:hover {
+      background-color: #444;
+    }
+
+    /* Main content grows to fill space */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 0;
+      width: 100%;
+    }
+
+    /* Gallery Grid */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      width: 95%;
+    }
+
+    .gallery-item {
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+
+    .gallery-item video {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-item .title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 8px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 1rem;
       text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.7);
     }
 
-    p {
-      opacity: 0.7;
-      font-size: 1.1rem;
+    .gallery-item:hover .title {
+      opacity: 1;
+    }
+
+    /* Footer fixed to bottom */
+    footer {
+      background-color: #1e1e1e;
+      padding: 20px;
+      text-align: center;
+      color: #aaa;
+      border-top: 1px solid #333;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+    }
+    footer a {
+      color: #f2f2f2;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    footer a:hover {
+      color: #ff9800;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .gallery {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .gallery-item video {
+        height: 150px;
+      }
+    }
+    @media (max-width: 480px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      .gallery-item video {
+        height: 200px;
+      }
     }
   </style>
 </head>
 <body>
-  <div>
-    <h1>Coming Soon</h1>
-    <p>We’re working on something new.</p>
+
+  <!-- Navbar -->
+  <div id="navbar">
+    <a href="#home">Home</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
   </div>
+
+  <!-- Main Content -->
+  <main>
+    <div class="gallery" id="gallery">
+      <div class="gallery-item">
+        <video src="video-1.mp4" controls></video>
+        <div class="title">COMING SOON!</div>
+      </div>
+      <div class="gallery-item">
+        <video src="video-2.mp4" controls></video>
+        <div class="title">COMING SOON!</div>
+      </div>
+      <div class="gallery-item">
+        <video src="video-3.mp4" controls></video>
+        <div class="title">COMING SOON!</div>
+      </div>
+      <div class="gallery-item">
+        <video src="video-4.mp4" controls></video>
+        <div class="title">COMING SOON!</div>
+      </div>
+      <div class="gallery-item">
+        <video src="video-5.mp4" controls></video>
+        <div class="title">COMING SOON!</div>
+      </div>
+      <div class="gallery-item">
+        <video src="video-6.mp4" controls></video>
+        <div class="title">COMING SOON!</div>
+      </div>
+      <div class="gallery-item">
+        <video src="video-7.mp4" controls></video>
+        <div class="title">COMING SOON!</div>
+      </div>
+      <div class="gallery-item">
+        <video src="video-8.mp4" controls></video>
+        <div class="title">COMING SOON!</div>
+      </div>
+      <!-- Add more items to fill 4x4 grid -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 87V4
+  </footer>
+
 </body>
 </html>
