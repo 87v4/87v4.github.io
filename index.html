@@ -2,40 +2,175 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>87V4</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon</title>
+
+  <style>
+    :root {
+      --bg1: #0b0b14;
+      --bg2: #121225;
+      --accent: #7c7cff;
+      --text: #eaeaff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(120deg, var(--bg1), var(--bg2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(16px);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      animation: fadeUp 1.2s ease forwards;
+      max-width: 420px;
+      width: 90%;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: 1px;
+    }
+
+    p {
+      opacity: 0.85;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    button {
+      padding: 0.75rem 2.2rem;
+      border: none;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #0a0a14;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(124, 124, 255, 0.4);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 1rem;
+      font-size: 0.75rem;
+      opacity: 0.5;
+      z-index: 1;
+    }
+  </style>
 </head>
 <body>
 
-<header class="hero">
-  <h1>87V4</h1>
-  <p>Scripts from my videos.</p>
-</header>
-
-<main class="downloads">
+  <canvas id="particles"></canvas>
 
   <div class="card">
-    <h2>POPCORN CLIENT</h2>
-    <p class="desc">A temporary email client written with mail.gw in python.</p>
-
-    <div class="meta">
-      <span>Version: 1.0.0</span>
-      <span>Size: 5 KB</span>
-    </div>
-
-    <a class="btn" href="popcorn.rar">Download</a>
+    <h1>Coming Soon</h1>
+    <p>
+      Something clean, fast, and powerful is in the works.  
+      We’re almost ready.
+    </p>
   </div>
 
+  <footer>© 2026 Your Project</footer>
 
+  <script>
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
 
+    let width, height;
+    const particles = [];
+    const count = 80;
 
-</main>
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
 
-<footer>
-  © 2026 · 87V4
-</footer>
+    window.addEventListener("resize", resize);
+    resize();
 
-<script src="script.js"></script>
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.radius = Math.random() * 2 + 0.5;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.alpha = Math.random() * 0.5 + 0.3;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(124,124,255,${this.alpha})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < count; i++) {
+      particles.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
 </body>
 </html>
