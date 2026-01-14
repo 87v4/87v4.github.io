@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .redirect-container {
+            background: #1e1e1e;
+            border-radius: 15px;
+            padding: 40px 50px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #ff6f61;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .countdown {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ff6f61;
+        }
+
+        @media (max-width: 600px) {
+            .redirect-container {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .countdown {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-container">
+        <h1>Redirecting to our Discord Server</h1>
+        <p>Please wait while we redirect you automatically.</p>
+        <p>Redirecting in <span class="countdown">5</span> seconds...</p>
+    </div>
+
+    <script>
+        let countdownElement = document.querySelector('.countdown');
+        let timeLeft = 5; // seconds
+
+        let countdownInterval = setInterval(() => {
+            timeLeft--;
+            countdownElement.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                // Redirect to your Discord server URL
+                window.location.href = 'https://discord.gg/H8UkudNNRG';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
